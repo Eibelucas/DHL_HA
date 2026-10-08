@@ -1,0 +1,20 @@
+add_tracking_number:
+  fields:
+    tracking_number:
+      required: true
+      example: "00340434721045331774"
+      selector:
+        text:
+    name:
+      required: false
+      example: "Kochbuch"
+      selector:
+        text:
+remove_tracking_number:
+  fields:
+    tracking_number:
+      required: true
+      example: "00340434721045331774"
+      selector:
+        text:
+scan_now:

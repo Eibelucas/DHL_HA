@@ -1,0 +1,101 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "DHL Mail Tracker einrichten",
+        "description": "Das Postfach wird per IMAP nach DHL-Versandmails durchsucht. Bei Gmail brauchst du ein App-Passwort (Google-Konto → Sicherheit → App-Passwörter). Den kostenlosen API-Key gibt es auf developer.dhl.com (API: Shipment Tracking – Unified).",
+        "data": {
+          "username": "E-Mail-Adresse",
+          "password": "Passwort / App-Passwort",
+          "api_key": "DHL API-Key",
+          "imap_server": "IMAP-Server",
+          "imap_port": "IMAP-Port",
+          "folder": "Ordner"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Zugangsdaten erneuern",
+        "description": "Die Anmeldung für {username} ist fehlgeschlagen.",
+        "data": {
+          "password": "Passwort / App-Passwort",
+          "api_key": "DHL API-Key"
+        }
+      }
+    },
+    "error": {
+      "invalid_imap_auth": "IMAP-Anmeldung fehlgeschlagen. Bei Gmail: App-Passwort verwenden.",
+      "cannot_connect_imap": "IMAP-Server nicht erreichbar oder Ordner existiert nicht.",
+      "invalid_api_key": "DHL API-Key ungültig.",
+      "cannot_connect_dhl": "DHL API nicht erreichbar."
+    },
+    "abort": {
+      "already_configured": "Dieses Postfach ist schon eingerichtet.",
+      "reauth_successful": "Zugangsdaten aktualisiert."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Optionen",
+        "data": {
+          "scan_interval": "Abfrage-Intervall",
+          "days_back": "Mails der letzten X Tage durchsuchen",
+          "keep_delivered_hours": "Zugestellte Pakete noch so lange anzeigen",
+          "folder": "Ordner"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "summary": {
+        "name": "Pakete unterwegs"
+      },
+      "parcel": {
+        "name": "{name}",
+        "state": {
+          "pre-transit": "Angekündigt",
+          "transit": "Unterwegs",
+          "delivered": "Zugestellt",
+          "failure": "Problem",
+          "unknown": "Unbekannt"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "not_loaded": {
+      "message": "DHL Mail Tracker ist nicht geladen."
+    }
+  },
+  "services": {
+    "add_tracking_number": {
+      "name": "Sendungsnummer hinzufügen",
+      "description": "Eine Sendung manuell verfolgen.",
+      "fields": {
+        "tracking_number": {
+          "name": "Sendungsnummer",
+          "description": "DHL-Sendungsnummer"
+        },
+        "name": {
+          "name": "Name",
+          "description": "Optionaler Anzeigename"
+        }
+      }
+    },
+    "remove_tracking_number": {
+      "name": "Sendung entfernen",
+      "description": "Sendung nicht mehr verfolgen und nicht erneut aus Mails übernehmen.",
+      "fields": {
+        "tracking_number": {
+          "name": "Sendungsnummer",
+          "description": "DHL-Sendungsnummer"
+        }
+      }
+    },
+    "scan_now": {
+      "name": "Jetzt prüfen",
+      "description": "Postfach und Sendungsstatus sofort aktualisieren."
+    }
+  }
+}

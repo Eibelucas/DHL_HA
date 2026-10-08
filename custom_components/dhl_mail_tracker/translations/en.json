@@ -1,0 +1,101 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up DHL Mail Tracker",
+        "description": "Your mailbox is scanned via IMAP for DHL shipping mails. Gmail needs an app password. Get the free API key at developer.dhl.com (Shipment Tracking - Unified).",
+        "data": {
+          "username": "E-mail address",
+          "password": "Password / app password",
+          "api_key": "DHL API key",
+          "imap_server": "IMAP server",
+          "imap_port": "IMAP port",
+          "folder": "Folder"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Renew credentials",
+        "description": "Sign-in for {username} failed.",
+        "data": {
+          "password": "Password / app password",
+          "api_key": "DHL API key"
+        }
+      }
+    },
+    "error": {
+      "invalid_imap_auth": "IMAP login failed. For Gmail use an app password.",
+      "cannot_connect_imap": "Cannot reach IMAP server or folder missing.",
+      "invalid_api_key": "Invalid DHL API key.",
+      "cannot_connect_dhl": "Cannot reach DHL API."
+    },
+    "abort": {
+      "already_configured": "This mailbox is already configured.",
+      "reauth_successful": "Credentials updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options",
+        "data": {
+          "scan_interval": "Update interval",
+          "days_back": "Scan mails of the last X days",
+          "keep_delivered_hours": "Keep delivered parcels for",
+          "folder": "Folder"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "summary": {
+        "name": "Parcels on the way"
+      },
+      "parcel": {
+        "name": "{name}",
+        "state": {
+          "pre-transit": "Announced",
+          "transit": "In transit",
+          "delivered": "Delivered",
+          "failure": "Problem",
+          "unknown": "Unknown"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "not_loaded": {
+      "message": "DHL Mail Tracker is not loaded."
+    }
+  },
+  "services": {
+    "add_tracking_number": {
+      "name": "Add tracking number",
+      "description": "Track a parcel manually.",
+      "fields": {
+        "tracking_number": {
+          "name": "Tracking number",
+          "description": "DHL tracking number"
+        },
+        "name": {
+          "name": "Name",
+          "description": "Optional display name"
+        }
+      }
+    },
+    "remove_tracking_number": {
+      "name": "Remove parcel",
+      "description": "Stop tracking and never re-add from mails.",
+      "fields": {
+        "tracking_number": {
+          "name": "Tracking number",
+          "description": "DHL tracking number"
+        }
+      }
+    },
+    "scan_now": {
+      "name": "Scan now",
+      "description": "Scan mailbox and refresh parcels now."
+    }
+  }
+}
